@@ -8,7 +8,7 @@ import (
 
 type User struct {
 	ID       int64
-	Name     string `binding:"required"`
+	Name     string 
 	Email    string `binding:"required"`
 	Password string `binding:"required"`
 }
@@ -45,12 +45,14 @@ func (u *User) Save() error {
 	return nil
 }
 
-func (u User) ValidateCridentials() error {
-	query := "SELECT password FROM users WHERE email = ?"
+func (u *User) ValidateCridentials() error {
+	query := "SELECT name, password FROM users WHERE email = ?"
 	row := db.DB.QueryRow(query, u.Email)
 
 	var retrievedPassword string
-	err := row.Scan(&retrievedPassword)
+	var userName string
+	err := row.Scan(&userName, &retrievedPassword)
+	u.Name = userName
 
 	// email not found
 	if err != nil {
