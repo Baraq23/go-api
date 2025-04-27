@@ -12,6 +12,7 @@ func RegisteredRoutes(server *gin.Engine) {
 	server.POST("/events", controllers.CreateEvent)
 	server.PUT("/events/:id", controllers.UpdateEvent) //PUT is used to Update
 	server.DELETE("/events/:id", controllers.DeleteEvent)
-	server.POST("/signup", controllers.SignUp)
+	server.POST("/signup", controllers.Signup)
+	server.POST("/login", controllers.Login)
 
 }

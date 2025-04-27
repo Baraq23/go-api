@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"goapi/db"
 	"goapi/utils"
 )
@@ -40,6 +41,28 @@ func (u *User) Save() error {
 	}
 
 	u.ID = userId
+
+	return nil
+}
+
+func (u User) ValidateCridentials() error {
+	query := "SELECT password FROM users WHERE email = ?"
+	row := db.DB.QueryRow(query, u.Email)
+
+	var retrievedPassword string
+	err := row.Scan(&retrievedPassword)
+
+	// email not found
+	if err != nil {
+		return errors.New("Invalid credentials")
+	}
+
+	// email found code continues; check if password bound to that email is valid
+	passwordIsValid := utils.CheckPasswordHash(u.Password, retrievedPassword)
+
+	if !passwordIsValid {
+		return errors.New("Invalid credentials")
+	}
 
 	return nil
 }
