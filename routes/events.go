@@ -55,7 +55,6 @@ func createEvent(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"message": "Event created!", "event": event})
 }
 
-
 func updateEvent(context *gin.Context) {
 	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 
@@ -70,7 +69,6 @@ func updateEvent(context *gin.Context) {
 		context.JSON(http.StatusNotFound, gin.H{"message": "Could not fetch event."})
 		return
 	}
-
 
 	var updatedEvent models.Event
 
@@ -117,4 +115,3 @@ func deleteEvent(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"message": "Event deleted successfully!"})
 
 }
-
