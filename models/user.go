@@ -4,12 +4,13 @@ import "goapi/db"
 
 type User struct {
 	ID       int64
+	Name     string `binding:"required"`
 	Email    string `binding:"required"`
 	Password string `binding:"required"`
 }
 
-func (u User) Save() error {
-	query := "INSERT INTO users(email, password) VALUES (?, ?)"
+func (u *User) Save() error {
+	query := "INSERT INTO users(name, email, password) VALUES (?, ?, ?)"
 	stmt, err := db.DB.Prepare(query)
 
 	if err != nil {
@@ -18,7 +19,7 @@ func (u User) Save() error {
 
 	defer stmt.Close()
 
-	result, err := stmt.Exec(u.Email, u.Password)
+	result, err := stmt.Exec(u.Name, u.Email, u.Password)
 
 	if err != nil {
 		return err
@@ -32,6 +33,5 @@ func (u User) Save() error {
 
 	u.ID = userId
 
-	
 	return nil
 }
