@@ -1,13 +1,17 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"goapi/controllers"
+
+	"github.com/gin-gonic/gin"
+)
 
 func RegisteredRoutes(server *gin.Engine) {
-	server.GET("/events", getEvents)
-	server.GET("/events/:id", getEvent)
-	server.POST("/events", createEvent)
-	server.PUT("/events/:id", updateEvent) //PUT is used to Update
-	server.DELETE("/events/:id", deleteEvent)
-	server.POST("/signup", signUp)
+	server.GET("/events", controllers.GetEvents)
+	server.GET("/events/:id", controllers.GetEvent)
+	server.POST("/events", controllers.CreateEvent)
+	server.PUT("/events/:id", controllers.UpdateEvent) //PUT is used to Update
+	server.DELETE("/events/:id", controllers.DeleteEvent)
+	server.POST("/signup", controllers.SignUp)
 
 }

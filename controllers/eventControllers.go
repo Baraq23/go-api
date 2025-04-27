@@ -1,4 +1,5 @@
-package routes
+package controllers
+
 
 import (
 	"goapi/models"
@@ -8,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func getEvents(context *gin.Context) {
+func GetEvents(context *gin.Context) {
 	events, err := models.GetAllEvents()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch events. Try agin later."})
@@ -17,7 +18,7 @@ func getEvents(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"events list": events, "message": "all events fetched from the db"})
 }
 
-func getEvent(context *gin.Context) {
+func GetEvent(context *gin.Context) {
 	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 
 	if err != nil {
@@ -35,7 +36,7 @@ func getEvent(context *gin.Context) {
 	context.JSON(http.StatusOK, event)
 }
 
-func createEvent(context *gin.Context) {
+func CreateEvent(context *gin.Context) {
 	var event models.Event
 	err := context.ShouldBindJSON(&event)
 	if err != nil {
@@ -55,7 +56,7 @@ func createEvent(context *gin.Context) {
 	context.JSON(http.StatusCreated, gin.H{"message": "Event created!", "event": event})
 }
 
-func updateEvent(context *gin.Context) {
+func UpdateEvent(context *gin.Context) {
 	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 
 	if err != nil {
@@ -91,7 +92,7 @@ func updateEvent(context *gin.Context) {
 
 }
 
-func deleteEvent(context *gin.Context) {
+func DeleteEvent(context *gin.Context) {
 	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 
 	if err != nil {

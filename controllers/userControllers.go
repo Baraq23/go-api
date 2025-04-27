@@ -1,4 +1,4 @@
-package routes
+package controllers
 
 import (
 	"goapi/models"
@@ -8,7 +8,7 @@ import (
 )
 
 
-func signUp(context *gin.Context) {
+func SignUp(context *gin.Context) {
 	var user models.User
 	err := context.ShouldBindJSON(&user)
 
