@@ -4,6 +4,7 @@ import (
 	"errors"
 	"goapi/db"
 	"goapi/utils"
+	"log"
 )
 
 type User struct {
@@ -14,6 +15,9 @@ type User struct {
 }
 
 func (u *User) Save() error {
+	// if u.Name == "" {
+    //     return errors.New("name cannot be empty")
+    // }
 	query := "INSERT INTO users(name, email, password) VALUES (?, ?, ?)"
 	stmt, err := db.DB.Prepare(query)
 
@@ -27,6 +31,8 @@ func (u *User) Save() error {
 	if err != nil {
 		return err
 	}
+
+	log.Println("user name: ", u.Name)
 
 	result, err := stmt.Exec(u.Name, u.Email, hashedPass)
 

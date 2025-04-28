@@ -17,6 +17,10 @@ func Signup(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data."})
 		return
 	}
+	
+	// if user.Name == "" {
+	// 	user.Name = "User"
+	// }
 
 	err = user.Save()
 
