@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"goapi/models"
+	"goapi/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -45,6 +46,13 @@ func Login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "User logged in successfully."})
+	token, err := utils.GenerateToken(user.Email, user.ID)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not generate user token."})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "User logged in successfully.", "token": token})
 }
 
