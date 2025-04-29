@@ -1,2 +1,2 @@
-DELETE http://localhost:8080/events/3
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZ21haWwuY29tIiwiZXhwIjoxNzQ1OTIxNzg5LCJ1c2VySWQiOjF9.RecGS13Fre2RDbX4xtSTztIiYhS-PwhnTtZx-wTvRMI
+DELETE http://localhost:8080/events/5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV4YW1wbGVAZ21haWwuY29tIiwiZXhwIjoxNzQ1OTIyNjE5LCJ1c2VySWQiOjF9.dDqT6kgwADpJIB_x_RFpeeqgT1v-v_hEyj7esZpZdhg
