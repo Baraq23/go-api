@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
+var TotalUsers int
 
 func Signup(context *gin.Context) {
 	var user models.User
@@ -29,7 +29,9 @@ func Signup(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"message": "User signed up successfully."})
+	TotalUsers+=1
+
+	context.JSON(http.StatusCreated, gin.H{"message": "User signed up successfully.", "total users": TotalUsers})
 }
 
 
@@ -58,5 +60,26 @@ func Login(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{"message": "User logged in successfully.", "token": token, "userId": user.ID})
+}
+
+
+func GetCreatedEvents(context *gin.Context) {
+	userId := context.GetInt64("userId")
+	events, err := models.GetCreatedEvent(userId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch events created. Try agin later."})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{"list of your created events": events})
+}
+
+func GetRegisteredEvents(context *gin.Context) {
+	userId := context.GetInt64("userId")
+	events, err := models.GetRegisteredEvent(userId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch events registered to. Try agin later."})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{"list of your registered events": events})
 }
 

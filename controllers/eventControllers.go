@@ -74,7 +74,7 @@ func UpdateEvent(context *gin.Context) {
 	userId := context.GetInt64("userId")
 
 	if event.UserID != userId {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not Authorized."})
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not Authorized to update event."})
 		return
 	}
 
@@ -117,7 +117,7 @@ func DeleteEvent(context *gin.Context) {
 	userId := context.GetInt64("userId")
 
 	if event.UserID != userId {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not Authorized."})
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not Authorized to delete event."})
 		return
 	}
 
