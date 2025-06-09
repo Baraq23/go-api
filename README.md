@@ -3,134 +3,49 @@
 This project is a backend API designed to handle event creation and user bookings efficiently. Built using Go with the Gin web framework, it leverages SQLite as the database, with GORM as the ORM for smooth and reliable database interactions. The API provides a solid foundation for managing events, enabling features such as event listing, creation, and user reservations.
 
 
-### API Documentation
+📘 API Documentation
 
-This document describes the endpoints exposed by the Go API using the Gin framework.
+Base URL: http://localhost:8080
 
-Base URL; `http://localhost:8080`
+- Public Routes (No Authentication Required)
+Method	Endpoint	Description	Controller
+GET	/events	Retrieves a list of all events.	controllers.GetEvents
+GET	/events/:id	Retrieves details of a specific event.	controllers.GetEvent
+POST	/signup	Registers a new user.	controllers.Signup
+POST	/login	Authenticates a user and returns a token.	controllers.Login
 
-Public Routes (No Authentication Required)
-List All Events
+- Authenticated Routes (Require JWT Token)
+Method	Endpoint	Description	Controller
+POST	/events	Creates a new event.	controllers.CreateEvent
+GET	/events/registered	Lists all events the authenticated user has registered for.	controllers.GetRegisteredEvents
+GET	/events/created	Lists all events created by the authenticated user.	controllers.GetCreatedEvents
+PUT	/events/:id	Updates an existing event by ID.	controllers.UpdateEvent
+DELETE	/events/:id	Deletes an event by ID.	controllers.DeleteEvent
+POST	/events/:id/register	Registers the user for the specified event.	controllers.RegisterForEvent
+DELETE	/events/:id/register	Cancels the user's registration for the specified event.	controllers.CancelRegistration
+🚀 Running the Project Locally
 
-    Method: GET
+To run this project on your local machine, follow the steps below:
+- Prerequisites
 
-    Path: /events
+    Go installed (v1.18 or later recommended)
 
-    Description:
-    Retrieves a list of all events.
+    Git installed
 
-    Controller: controllers.GetEvents
+    (Optional) make if using Makefile for automation
 
-Get Event by ID
+🛠️ Setup Steps
 
-    Method: GET
+# 1. Clone the repository
+git clone https://github.com/your-username/event-management-api.git
+cd event-management-api
 
-    Path: /events/:id
+# 2. Download dependencies
+go mod tidy
 
-    Description:
-    Retrieves details of a specific event by its ID.
+# 3. Run the API
+go run main.go
 
-    Controller: controllers.GetEvent
+The API will start on http://localhost:8080
 
-User Signup
-
-    Method: POST
-
-    Path: /signup
-
-    Description:
-    Registers a new user.
-
-    Controller: controllers.Signup
-
-User Login
-
-    Method: POST
-
-    Path: /login
-
-    Description:
-    Authenticates a user and returns a token.
-
-    Controller: controllers.Login
-
-Authenticated Routes
-
-All routes below require authentication.
-
-Create Event
-
-    Method: POST
-
-    Path: /events
-
-    Description:
-    Creates a new event.
-
-    Controller: controllers.CreateEvent
-
-List Registered Events
-
-    Method: GET
-
-    Path: /events/registered
-
-    Description:
-    Lists all events the authenticated user has registered for.
-
-    Controller: controllers.GetRegisteredEvents
-
-List Created Events
-
-    Method: GET
-
-    Path: /events/created
-
-    Description:
-    Lists all events created by the authenticated user.
-
-    Controller: controllers.GetCreatedEvents
-
-Update Event
-
-    Method: PUT
-
-    Path: /events/:id
-
-    Description:
-    Updates an existing event by ID.
-
-    Controller: controllers.UpdateEvent
-
-Delete Event
-
-    Method: DELETE
-
-    Path: /events/:id
-
-    Description:
-    Deletes an event by ID.
-
-    Controller: controllers.DeleteEvent
-
-Register for Event
-
-    Method: POST
-
-    Path: /events/:id/register
-
-    Description:
-    Registers the authenticated user for the specified event.
-
-    Controller: controllers.RegisterForEvent
-
-Cancel Registration
-
-    Method: DELETE
-
-    Path: /events/:id/register
-
-    Description:
-    Cancels the authenticated user’s registration for the specified event.
-
-    Controller: controllers.CancelRegistration
+    🗒️ Note: The project uses SQLite as the database. On first run, the database file will be created automatically.
