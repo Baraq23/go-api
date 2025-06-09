@@ -1,7 +1,6 @@
-## Event Managemet API Project
+# Event Management API Project
 
-- this project entails build an API tho manage event creation and bookings by users. It uses Go with gin package and SQLite powered database with GORM for effective database communication.
-
+This project is a backend API designed to handle event creation and user bookings efficiently. Built using Go with the Gin web framework, it leverages SQLite as the database, with GORM as the ORM for smooth and reliable database interactions. The API provides a solid foundation for managing events, enabling features such as event listing, creation, and user reservations.
 
 
 ### API Documentation
